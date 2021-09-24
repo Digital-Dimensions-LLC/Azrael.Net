@@ -11,77 +11,48 @@ namespace Azrael.Net.Api
 {
     public class AzraelAPI
     {
-        public static string BaseURL = @"https://azrael.gg/v2/api/";
+        public static string BaseURL = @"https://azrael.gg/api/v2/";
 
-        // https://azrael.gg/v2/api/bans/check/:id
-        public static async Task<bool> CheckBan(string UserID, string APIKey)
+        // https://azrael.gg/api/v2/bans/check/:id
+        public static async Task<bool> CheckBan(string UserID, string ApiToken)
         {
-            HttpClient _apiRequest = new HttpClient();
-
-            // TLS 1.2 due to https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-#tls-protocol-version-support
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            _apiRequest.BaseAddress = new Uri(BaseURL);
-            _apiRequest.DefaultRequestHeaders.Accept.Clear();
-            _apiRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _apiRequest.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", APIKey);
-            HttpResponseMessage _apiResponse = await _apiRequest.GetAsync("bans/check/" + UserID);
+            HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
+            HttpResponseMessage _apiResponse = await Client.GetAsync("bans/check/" + UserID);
             BanRecord _apiBan = JsonSerializer.Deserialize<BanRecord>(await _apiResponse.Content.ReadAsStringAsync());
             Utility.ProcessStatusCode(_apiBan);
             if (_apiBan.Banned)
+            {
                 return true;
+            }
             return false;
         }
 
         // https://azrael.gg/api/v2/bans/get/:id
-        public static async Task<BanRecord> GetBan(ulong UserID, string APIKey)
+        public static async Task<BanRecord> GetBan(ulong UserID, string ApiToken)
         {
-            HttpClient _apiRequest = new HttpClient();
-            _apiRequest.BaseAddress = new Uri(BaseURL);
-
-            // TLS 1.2 due to https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-#tls-protocol-version-support
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            _apiRequest.DefaultRequestHeaders.Accept.Clear();
-            _apiRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _apiRequest.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", APIKey);
-            HttpResponseMessage _apiResponse = await _apiRequest.GetAsync("bans/get/" + UserID);
+            HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
+            HttpResponseMessage _apiResponse = await Client.GetAsync("bans/get/" + UserID);
             BanRecord ApiBan = JsonSerializer.Deserialize<BanRecord>(await _apiResponse.Content.ReadAsStringAsync());
             Utility.ProcessStatusCode(ApiBan);
-            return ApiBan;
-            
+            return ApiBan;            
         }
+
         // https://azrael.gg/api/v2/bans/add/
-        public static async Task<BanRecord> AddBan(string UserID, string APIKey, string BanReason, string Proof)
+        public static async Task<BanRecord> AddBan(string UserID, string ApiToken, string BanReason, string Proof)
         {
-            HttpClient _apiRequest = new HttpClient();
-            _apiRequest.BaseAddress = new Uri(BaseURL);
-
-            // TLS 1.2 due to https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-#tls-protocol-version-support
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            _apiRequest.DefaultRequestHeaders.Accept.Clear();
-            _apiRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _apiRequest.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", APIKey);
+            HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
             var _banJson = JsonSerializer.Serialize(new BanData(UserID, BanReason, Proof));
-            HttpResponseMessage _apiResponse = await _apiRequest.PostAsync("bans/add/", new StringContent(_banJson));
+            HttpResponseMessage _apiResponse = await Client.PostAsync("bans/add/", new StringContent(_banJson));
             BanRecord ApiBan = JsonSerializer.Deserialize<BanRecord>(await _apiResponse.Content.ReadAsStringAsync());
             Utility.ProcessStatusCode(ApiBan);
             return ApiBan;
         }
+
         // https://azrael.gg/api/v2/bans/remove/:id
-        public static async Task<bool> DeleteBan(ulong UserID, string APIKey)
+        public static async Task<bool> DeleteBan(ulong UserID, string ApiToken)
         {
-            HttpClient _apiRequest = new HttpClient();
-            _apiRequest.BaseAddress = new Uri(BaseURL);
-
-            // TLS 1.2 due to https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-#tls-protocol-version-support
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            _apiRequest.DefaultRequestHeaders.Accept.Clear();
-            _apiRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _apiRequest.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", APIKey);
-            HttpResponseMessage _apiResponse = await _apiRequest.DeleteAsync("bans/remove/" + UserID);
+            HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
+            HttpResponseMessage _apiResponse = await Client.DeleteAsync("bans/remove/" + UserID);
             BanRecord _apiBan = JsonSerializer.Deserialize<BanRecord>(await _apiResponse.Content.ReadAsStringAsync());
             Utility.ProcessStatusCode(_apiBan);
             if (_apiBan.Status == 200)
