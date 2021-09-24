@@ -7,16 +7,20 @@ using Azrael.Net.Data;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Azrael.Net
+namespace Azrael.Net.Api
 {
-    public class API
+    public class AzraelAPI
     {
         public static string BaseURL = @"https://azrael.gg/v2/api/";
 
         // https://azrael.gg/v2/api/bans/check/:id
-        public static async Task<bool> CheckBan(ulong UserID, string APIKey)
+        public static async Task<bool> CheckBan(string UserID, string APIKey)
         {
             HttpClient _apiRequest = new HttpClient();
+
+            // TLS 1.2 due to https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-#tls-protocol-version-support
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             _apiRequest.BaseAddress = new Uri(BaseURL);
             _apiRequest.DefaultRequestHeaders.Accept.Clear();
             _apiRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -34,6 +38,10 @@ namespace Azrael.Net
         {
             HttpClient _apiRequest = new HttpClient();
             _apiRequest.BaseAddress = new Uri(BaseURL);
+
+            // TLS 1.2 due to https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-#tls-protocol-version-support
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             _apiRequest.DefaultRequestHeaders.Accept.Clear();
             _apiRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _apiRequest.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", APIKey);
@@ -48,6 +56,10 @@ namespace Azrael.Net
         {
             HttpClient _apiRequest = new HttpClient();
             _apiRequest.BaseAddress = new Uri(BaseURL);
+
+            // TLS 1.2 due to https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-#tls-protocol-version-support
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             _apiRequest.DefaultRequestHeaders.Accept.Clear();
             _apiRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _apiRequest.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", APIKey);
@@ -62,6 +74,10 @@ namespace Azrael.Net
         {
             HttpClient _apiRequest = new HttpClient();
             _apiRequest.BaseAddress = new Uri(BaseURL);
+
+            // TLS 1.2 due to https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-#tls-protocol-version-support
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             _apiRequest.DefaultRequestHeaders.Accept.Clear();
             _apiRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _apiRequest.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", APIKey);
