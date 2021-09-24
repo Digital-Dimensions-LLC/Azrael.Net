@@ -4,6 +4,6 @@
  Documentation can be found here. 
  https://docs.azrael.gg/api/v2-documentation
  
- Must request an API key @ azrael.gg.
+ Must request an API key @ https://azrael.gg.
  
- Please refer to Azrael's TOS @ azrael.gg
+ Please refer to Azrael's TOS @ https://docs.azrael.gg/legal/api-policy
