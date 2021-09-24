@@ -22,6 +22,9 @@ namespace Azrael.Net.Data
         [JsonPropertyName("notes")]
         public string Notes { get; set; }
 
+        [JsonConstructor]
+        public BanData() { }
+
         public BanData(string UserID, string BanReason, string ProofURL)
         {
             Id = UserID;
