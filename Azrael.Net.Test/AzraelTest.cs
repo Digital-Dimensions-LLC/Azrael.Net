@@ -12,7 +12,7 @@ namespace Azrael.Net.Test
     [TestClass]
     public class AzraelTest
     {
-        private string apiKey = "";
+        private readonly string apiKey = Utility.GetToken("token.txt");
 
         [TestMethod]
         [Theory]
