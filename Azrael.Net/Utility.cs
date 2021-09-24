@@ -16,9 +16,11 @@ namespace Azrael.Net
             if (response.Status == 400)
                 throw new ArgumentException("The user ID provided is invalid.");
             if (response.Status == 401)
-                throw new UnauthorizedAccessException("The server returned status 401: Unauthorized");
+                throw new Exception("The server returned status 401: Unauthorized");
             if (response.Status == 403)
                 throw new UnauthorizedAccessException("The server returned status 403: Authorization token invalid");
+            if (response.Status == 404)
+                throw new Exception("The server returned status 404: URL not found");
             if (response.Status == 500)
                 throw new Exception("The server returned status 500: Internal Server Error");
         }
