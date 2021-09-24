@@ -28,7 +28,7 @@ namespace Azrael.Net.Api
         }
 
         // https://azrael.gg/api/v2/bans/get/:id
-        public static async Task<BanRecord> GetBan(ulong UserID, string ApiToken)
+        public static async Task<BanRecord> GetBan(string UserID, string ApiToken)
         {
             HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
             HttpResponseMessage _apiResponse = await Client.GetAsync("bans/get/" + UserID);
@@ -49,7 +49,7 @@ namespace Azrael.Net.Api
         }
 
         // https://azrael.gg/api/v2/bans/remove/:id
-        public static async Task<bool> DeleteBan(ulong UserID, string ApiToken)
+        public static async Task<bool> DeleteBan(string UserID, string ApiToken)
         {
             HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
             HttpResponseMessage _apiResponse = await Client.DeleteAsync("bans/remove/" + UserID);
