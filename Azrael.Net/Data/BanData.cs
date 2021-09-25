@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace Azrael.Net.Data
 {    public class BanData
@@ -8,7 +9,7 @@ namespace Azrael.Net.Data
         public string Id { get; set; }
 
         [JsonPropertyName("reason")]
-        public string Reason { get; set; }
+        public int? Reason { get; set; }
 
         [JsonPropertyName("proof")]
         public string Proof { get; set; }
@@ -20,12 +21,12 @@ namespace Azrael.Net.Data
         public string Moderator { get; set; }
 
         [JsonPropertyName("notes")]
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
 
         [JsonConstructor]
         public BanData() { }
 
-        public BanData(string UserID, string BanReason, string ProofURL)
+        public BanData(string UserID, int BanReason, string ProofURL)
         {
             Id = UserID;
             Reason = BanReason;

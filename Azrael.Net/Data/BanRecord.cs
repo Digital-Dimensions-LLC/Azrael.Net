@@ -11,6 +11,9 @@ namespace Azrael.Net.Data
         [JsonPropertyName("banned")]
         public bool Banned { get; set; }
 
+        [JsonPropertyName("banid")]
+        public string BanID { get; set; }
+
         [JsonPropertyName("bandata")]
         public BanData? BanData { get; set; }
 

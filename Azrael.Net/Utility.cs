@@ -10,7 +10,7 @@ using Azrael.Net.Data;
 
 namespace Azrael.Net
 {
-    class Utility
+    public class Utility
     {
         public static void ProcessStatusCode(BanRecord response)
         {

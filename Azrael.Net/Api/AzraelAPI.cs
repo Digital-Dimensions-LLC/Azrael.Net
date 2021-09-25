@@ -38,7 +38,7 @@ namespace Azrael.Net.Api
         }
 
         // https://azrael.gg/api/v2/bans/add/
-        public static async Task<BanRecord> AddBan(string UserID, string ApiToken, string BanReason, string Proof)
+        public static async Task<BanRecord> AddBan(string UserID, string ApiToken, int BanReason, string Proof)
         {
             HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
             var _banJson = JsonSerializer.Serialize(new BanData(UserID, BanReason, Proof));
