@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Net.Http.Headers;
+using System.Collections;
+using System.Text;
 using System.Threading.Tasks;
 using Azrael.Net.Data;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Azrael.Net.Api
 {
@@ -42,17 +46,25 @@ namespace Azrael.Net.Api
         {
             HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
             var _banJson = JsonSerializer.Serialize(new BanData(UserID, BanReason, Proof));
-            HttpResponseMessage _apiResponse = await Client.PostAsync("bans/add/", new StringContent(_banJson));
+            HttpResponseMessage _apiResponse = await Client.PostAsync("bans/add/", new StringContent(_banJson, Encoding.UTF8, "application/json"));
+            string test = await _apiResponse.Content.ReadAsStringAsync();
             BanRecord ApiBan = JsonSerializer.Deserialize<BanRecord>(await _apiResponse.Content.ReadAsStringAsync());
             Utility.ProcessStatusCode(ApiBan);
             return ApiBan;
         }
 
         // https://azrael.gg/api/v2/bans/remove/:id
-        public static async Task<bool> DeleteBan(string UserID, string ApiToken)
+        public static async Task<bool> DeleteBan(string UserID, string ApiToken, string Reason)
         {
             HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
-            HttpResponseMessage _apiResponse = await Client.DeleteAsync("bans/remove/" + UserID);
+            var reasonBody = new[] { new { Reason = Reason } };
+            HttpRequestMessage requestMessage = new HttpRequestMessage
+            {
+                Content = JsonContent.Create(Reason),
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri(BaseURL + "bans/remove/" + UserID)
+            };
+            HttpResponseMessage _apiResponse = await Client.SendAsync(requestMessage);
             BanRecord _apiBan = JsonSerializer.Deserialize<BanRecord>(await _apiResponse.Content.ReadAsStringAsync());
             Utility.ProcessStatusCode(_apiBan);
             if (_apiBan.Status == 200)

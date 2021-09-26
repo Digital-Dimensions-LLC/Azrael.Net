@@ -14,12 +14,15 @@ namespace Azrael.Net.Data
         [JsonPropertyName("proof")]
         public string Proof { get; set; }
 
+        [JsonIgnore]
         [JsonPropertyName("timestamp")]
         public string Timestamp { get; set; }
 
+        [JsonIgnore]
         [JsonPropertyName("moderator")]
         public string Moderator { get; set; }
 
+        [JsonIgnore]
         [JsonPropertyName("notes")]
         public string? Notes { get; set; }
 
@@ -31,6 +34,12 @@ namespace Azrael.Net.Data
             Id = UserID;
             Reason = BanReason;
             Proof = ProofURL;
+        }
+
+        public static string GetBanRequest(BanData data)
+        {
+            BanData good = new BanData(data.Id, 3, data.Proof);
+            return JsonSerializer.Serialize<BanData>(good);
         }
     }
 }

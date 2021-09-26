@@ -35,7 +35,6 @@ namespace Azrael.Net
 
             // TLS 1.2 due to https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-#tls-protocol-version-support
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
             ApiRequest.DefaultRequestHeaders.Accept.Clear();
             ApiRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             ApiRequest.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(ApiToken);
