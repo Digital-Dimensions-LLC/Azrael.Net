@@ -5,7 +5,7 @@
  Wrapper for Azrael.gg
  
  Documentation can be found here. 
- https://docs.azrael.gg/api/v2-documentation
+ https://docs.azrael.gg/api/v3-documentation
  
  Must request an API key @ https://api.azrael.gg.
  
