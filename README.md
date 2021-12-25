@@ -7,6 +7,6 @@
  Documentation can be found here. 
  https://docs.azrael.gg/api/v3-documentation
  
- Must request an API key @ https://api.azrael.gg.
+ Must request an API key @ https://dashboard.api.azrael.gg.
  
- Please refer to Azrael's TOS @ https://docs.azrael.gg/legal/api-policy
+ Please refer to Azrael's API Terms of Use @ https://i.azrael.gg/legal/api-terms
