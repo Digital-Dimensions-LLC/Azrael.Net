@@ -17,7 +17,7 @@ namespace Azrael.Net.Api
     {
         public static string BaseURL = @"https://api.azrael.gg/v5/";
 
-        // https://api.azrael.gg/api/v3/bans/check/:id
+        // https://api.azrael.gg/v5/bans/check/:id
         public static async Task<bool> CheckBan(string UserID, string ApiToken)
         {
             HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
@@ -31,7 +31,7 @@ namespace Azrael.Net.Api
             return false;
         }
 
-        // https://api.azrael.gg/api/v3/bans/get/:id
+        // https://api.azrael.gg/v5/bans/get/:id
         public static async Task<BanRecord> GetBan(string UserID, string ApiToken)
         {
             HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
@@ -41,7 +41,7 @@ namespace Azrael.Net.Api
             return ApiBan;            
         }
 
-        // https://api.azrael.gg/api/v3/bans/add/
+        // https://api.azrael.gg/v5/bans/add/
         public static async Task<BanRecord> AddBan(string UserID, string ApiToken, int BanReason, string Proof)
         {
             HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
@@ -53,7 +53,7 @@ namespace Azrael.Net.Api
             return ApiBan;
         }
 
-        // https://api.azrael.gg/api/v3/bans/remove/:id
+        // https://api.azrael.gg/v5/bans/remove/:id
         public static async Task<bool> DeleteBan(string UserID, string ApiToken, string Reason)
         {
             HttpClient Client = Utility.GetHttpClient(BaseURL, ApiToken);
