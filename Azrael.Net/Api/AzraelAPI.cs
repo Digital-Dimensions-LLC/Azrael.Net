@@ -15,7 +15,7 @@ namespace Azrael.Net.Api
 {
     public class AzraelAPI
     {
-        public static string BaseURL = @"https://api.azrael.gg/api/v3/";
+        public static string BaseURL = @"https://api.azrael.gg/v5/";
 
         // https://api.azrael.gg/api/v3/bans/check/:id
         public static async Task<bool> CheckBan(string UserID, string ApiToken)
