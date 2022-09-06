@@ -4,9 +4,9 @@
 
  Wrapper for Azrael.gg
  
- Documentation can be found here. 
- https://docs.azrael.gg/api/v3-documentation
+ Latest Documentation can be found here. 
+ https://i.azrael.gg/docs/api/global-ban
  
- Must request an API key @ https://dashboard.api.azrael.gg.
+ Must request an API key @ https://api-dashboard.azrael.gg.
  
  Please refer to Azrael's API Terms of Use @ https://i.azrael.gg/legal/api-terms
